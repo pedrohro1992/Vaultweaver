@@ -1,0 +1,18 @@
+apiVersion: security.platform.io/v1alpha1
+kind: VaultKubernetesRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: vaultweaver
+    app.kubernetes.io/managed-by: kustomize
+  name: cert-manager
+spec:
+  authMount: kubernetes
+  roleName: cert-manager
+  boundServiceAccounts:
+    - cert-manager
+  boundNamespaces:
+    - cert-manager
+  tokenPolicies:
+    - pki-cert-manager
+  tokenTTL: 1h
+  audience: vault

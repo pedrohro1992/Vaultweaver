@@ -1,0 +1,13 @@
+apiVersion: security.platform.io/v1alpha1
+kind: VaultPolicy
+metadata:
+  labels:
+    app.kubernetes.io/name: vaultweaver
+    app.kubernetes.io/managed-by: kustomize
+  name: pki-cert-manager
+spec:
+  vaultPolicyName: pki-cert-manager
+  policy: |
+    path "pki/sign/example-dot-com" {
+      capabilities = ["update"]
+    }

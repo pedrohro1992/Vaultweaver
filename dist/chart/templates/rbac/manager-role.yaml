@@ -1,0 +1,41 @@
+apiVersion: rbac.authorization.k8s.io/v1
+{{- if .Values.rbac.namespaced }}
+kind: Role
+{{- else }}
+kind: ClusterRole
+{{- end }}
+metadata:
+{{- if .Values.rbac.namespaced }}
+  namespace: {{ .Release.Namespace }}
+{{- end }}
+  name: {{ include "vaultweaver.resourceName" (dict "suffix" "manager-role" "context" $) }}
+rules:
+- apiGroups:
+  - security.platform.io
+  resources:
+  - vaultkubernetesrolebindings
+  - vaultpolicies
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - security.platform.io
+  resources:
+  - vaultkubernetesrolebindings/finalizers
+  - vaultpolicies/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - security.platform.io
+  resources:
+  - vaultkubernetesrolebindings/status
+  - vaultpolicies/status
+  verbs:
+  - get
+  - patch
+  - update
