@@ -90,6 +90,18 @@ manager:
   ##
   terminationGracePeriodSeconds: 10
 
+  ## Vault configuration
+  ##
+  env:
+    VAULT_ADDR: ""
+    VAULT_AUTH_KUBERNETES_ROLE: ""
+    VAULT_AUTH_KUBERNETES_MOUNT: "kubernetes"
+    # VAULT_AUTH_KUBERNETES_JWT_PATH: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+
+  ## Extra environment variables
+  ##
+  extraEnv: []
+
   ## Custom Deployment labels
   ##
   # labels: {}
